@@ -5,8 +5,8 @@ authkey = "WUJmUmxGRWhCUEtXcUJKSEZYZ05HNXNNQllEM29TQ0tBRmtBN2RnbXJnUUh1MXFkQVJYd
 
 PanelA_fileID = "Panel/PanelA_fileIDs.txt"
 PanelB_fileID = "Panel/PanelB_fileIDs.txt"
-PanelA = "/storage/bic/data/pfda-nctr/data/panel-a"
-PanelB = "/storage/bic/data/pfda-nctr/data/panel-b"
+PanelA = "/mnt/d/Panel-A/"
+PanelB = "/mnt/d/Panel-B/"
 
 with open(PanelA_fileID) as f:
     linesA = f.read().splitlines()
