@@ -12,10 +12,11 @@ conda activate indel-oncopanel
 absolute_path='/home/rintu.kutum/office/intern-rudra/workflow/lumpy-test-fda'
 storage_path='/storage/bic/data/pfda-nctr/data/test'
 
-bwa mem -R "@RG\tID:read1\tSM:read1\tLB:lib" $storage_path/reference/hg19.fa $storage_path/data/PanelA_LAB1_LIB1_R1.fastq.gz $storage_path/data/PanelA_LAB1_LIB1_R3.fastq.gz \
-| samblaster --excludeDups --addMateTags --maxSplitCount 2 --minNonOverlap 20 \
-| samtools view -S -b - \
-> $storage_path/read_1.bam
+bwa mem -R "@RG\tID:read1\tSM:read1\tLB:lib" $storage_path/reference/hg19.fa \
+    $storage_path/data/PanelA_LAB1_LIB1_R1.fastq.gz $storage_path/data/PanelA_LAB1_LIB1_R3.fastq.gz \
+    | samblaster --excludeDups --addMateTags --maxSplitCount 2 --minNonOverlap 20 \
+    | samtools view -S -b - \
+    > $storage_path/read_1.bam
 
 samtools view -b -F 1294 $storage_path/read_1.bam > $storage_path/read_1.discordants.unsorted.bam
 
