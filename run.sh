@@ -8,6 +8,10 @@
 
 module load compiler/anaconda3
 
+conda init
+
+source ~/.bashrc
+
 conda activate indel-oncopanel
 
 absolute_path='/home/rintu.kutum/office/intern-rudra/workflow/lumpy-test-fda'
