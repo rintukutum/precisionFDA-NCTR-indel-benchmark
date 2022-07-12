@@ -2,8 +2,9 @@
 #PBS -N pfda
 #PBS -o out.log
 #PBS -e err.log
-#PBS -l ncpus=1
+#PBS -l mem=12gb,ncpus=12
 #PBS -q cpu
+
 
 module load compiler/anaconda3
 
