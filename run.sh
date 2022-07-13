@@ -14,7 +14,7 @@ source ~/.bashrc
 conda activate indel-oncopanel
 
 absolute_path='/home/rintu.kutum/office/intern-rudra/workflow/lumpy-test-fda'
-storage_path='/storage/bic/data/pfda-nctr/data/test'
+storage_path='/storage/bic/data/pfda-nctr/test'
 
 bwa mem -R "@RG\tID:read1\tSM:read1\tLB:lib" $storage_path/reference/hg19.fa \
     $storage_path/data/PanelA_LAB1_LIB1_R1.fastq.gz $storage_path/data/PanelA_LAB1_LIB1_R3.fastq.gz \
