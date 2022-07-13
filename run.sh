@@ -37,4 +37,4 @@ lumpyexpress \
     -B $storage_path/read_1.bam \
     -S $storage_path/read_1.splitters.bam \
     -D $storage_path/read_1.discordants.bam \
-    -o $storage_path/read_1.vcf
+    -o $storage_path/read_1.vcf 
