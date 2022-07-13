@@ -5,7 +5,6 @@
 #PBS -l mem=12gb,ncpus=12
 #PBS -q cpu
 
-
 module load compiler/anaconda3
 
 conda init
@@ -30,9 +29,9 @@ samtools view -h $storage_path/read_1.bam \
     | samtools view -Sb - \
     > $storage_path/read_1.splitters.unsorted.bam
 
-samtools sort $storage_path/read_1.discordants.unsorted.bam $storage_path/read_1.discordants.bam
+samtools sort $storage_path/read_1.discordants.unsorted.bam > $storage_path/read_1.discordants.bam
 
-samtools sort $storage_path/read_1.splitters.unsorted.bam $storage_path/read_1.splitters.bam
+samtools sort $storage_path/read_1.splitters.unsorted.bam > $storage_path/read_1.splitters.bam
 
 lumpyexpress \
     -B $storage_path/read_1.bam \
