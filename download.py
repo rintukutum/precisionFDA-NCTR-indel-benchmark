@@ -1,21 +1,25 @@
+from multiprocessing import process
 import subprocess
+import multiprocessing
 
 # change the authorization key after every 24 hours
-authkey = "WUJmUmxGRWhCUEtXcUJKSEZYZ05HNXNNQllEM29TQ0tBRmtBN2RnbXJnUUh1MXFkQVJYdERCNERTNDBUV3FJbTdvVnd6YjFFb3RiQ1BHODhlTThMV3h1Zm9tZDcxNUxxa3ZLZ0xJZk8vMk15dXV1UHJiQlVmUW1uU2xBeU0zRiszL2JoaDlXak9yQ1JWazlDaTlzdWFWdFZ1b3Q1L0ZEbzRJWlNwK2REYzRQUGF2Qm5XSGpYZm55WnF0WjNoeW1MSDZWcjBRVnNOSERISGlaa25UcDZOZz09LS02clhWc3orN2cyK2ljS3ZwRGxsUnZnPT0=--f6322b37720554ef82bcecaef991c27fba59d58e"
+authkey = "UjNPVXIwNGVZR1kzM2lieW84azh2VWxBZW52WmV5eVZQeDNDU0pyNVRzV0VDL3ZReU9XYXVFQ0dmS2xrN0E3cEYvQTcyc0JQZWMzUlBjblFNSENJUkNMVFcrb0c5dnVnRWZIT0VyRkFSU0tQVkU0THVKUVYwd21IUERoTkVuUGg1eEpSVHFqUStZUXFkTThJRGNsTUV2N1dtaGF5S0JZR2pGdFB3YzB1L1VUcmNNKzk3ejM0VkpyK2hsNVo0ekp1NmZCQjYrVHlyOXBMRWhsQ1NOUDF4Zz09LS1hQ3E4L2NHNzczOTJVa0ZLSndFQTZ3PT0=--5a3407f969f0d9a5c1b30f2c54b33e3548b70a4b"
 
-PanelA_fileID = "Panel/PanelA_fileIDs.txt"
-PanelB_fileID = "Panel/PanelB_fileIDs.txt"
-PanelA = "/mnt/d/Panel-A/"
-PanelB = "/mnt/d/Panel-B/"
+file_id = "Panel/FileID.txt"
+storage = "/mnt/d/Oncopanel-Data/"
 
-with open(PanelA_fileID) as f:
-    linesA = f.read().splitlines()
+def multiprocessing_func(x):
+    subprocess.call(["./pfda", "download", "--key", authkey, "--file-id", x, "--output", storage])
 
-for entry in linesA:
-    subprocess.call(["./pfda", "download", "--key", authkey, "--file-id", entry, "--output", PanelA])
+with open(file_id) as f:
+    id = f.read().splitlines()
 
-with open(PanelB_fileID) as f:
-    linesB = f.read().splitlines()
+processes = []
 
-for entry in linesB:
-    subprocess.call(["./pfda", "download", "--key", authkey, "--file-id", entry, "--output", PanelB])
+for entry in id:
+    p = multiprocessing.Process(target=multiprocessing_func, args=(entry,))
+    processes.append(p)
+    p.start()
+
+for process in processes:
+    process.join()
