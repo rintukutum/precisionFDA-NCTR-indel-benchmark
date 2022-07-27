@@ -1,12 +1,20 @@
+configfile = "config.yaml"
+
 rule all:
     input:
         "all.vcf"
 
+def get_left_reads(wildcards):
+    return config["left_reads"][wildcards.sample]
+
+def get_right_reads(wildcards):
+    return config["right_reads"][wildcards.sample]
+
 rule bwa_map:
     input:
         fa = "reference/hg19.fa",
-        left_read = "{sample}_R1.fastq.gz",
-        right_read = "{sample}_R3.fastq.gz"
+        left_read = get_left_reads,
+        right_read = get_right_reads
     output:
         "mapped_reads/{sample}.bam"
     shell:
