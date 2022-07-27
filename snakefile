@@ -29,3 +29,29 @@ rule samtools_index:
         "samtools index {input}"
 
 rule mark_duplicates:
+    input:
+        "sorted_reads/{sample}.bam"
+    output:
+        "sorted_reads/marked_duplicates_{sample}.bam"
+    shell:
+        "java -jar picard.jar MarkDuplicates "
+        "I={input}.bam "
+        "O={output}.bam "
+        "M=marked_dup_metrics_{wildcards.sample}.txt"
+
+rule delly:
+    input:
+        fa="reference/hg19.fa",
+        bam="sorted_reads/{sample}.bam"
+    output:
+        "delly/{sample}.bcf"
+    shell:
+        "delly call -o {output} -g {input.fa} {input.bam}"
+
+rule convert_to_vcf:
+    input:
+        "delly/{sample}.bcf"
+    output:
+        "delly/{sample}.vcf"
+    shell:
+        "bcftools view {input} > {output}"
