@@ -1,8 +1,8 @@
 rule bwa_map:
     input:
         "reference/hg19.fa",
-        left_read = "data/{sample}_R1.fastq.gz",
-        right_read = "data/{sample}_R3.fastq.gz"
+        left_read = "data/{sample}.fastq.gz",
+        right_read = "data/{sample}.fastq.gz"
     output:
         "mapped_reads/{sample}.bam"
     shell:
